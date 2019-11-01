@@ -3,7 +3,7 @@ const express = require('express')
 const app = express();
 const server = require('http').Server(app);
 
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + 'rpg'))
 
 app.get('/', function (req,res){
     resizeBy.senfile(__dirname + 'index.html');
