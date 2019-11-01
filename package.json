@@ -1,0 +1,23 @@
+{
+  "name": "mmo-rpg-phaser",
+  "version": "1.0.0",
+  "description": "Simple MMO RPG game in Phaser (JavaScriot) - Web development class project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucasGuerraCavalcante/mmo-rpg-phaser.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LucasGuerraCavalcante/mmo-rpg-phaser/issues"
+  },
+  "homepage": "https://github.com/LucasGuerraCavalcante/mmo-rpg-phaser#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
