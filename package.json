@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/LucasGuerraCavalcante/mmo-rpg-phaser#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "canvas": "^2.6.0",
+    "datauri": "^2.0.0",
+    "express": "^4.17.1",
+    "jsdom": "^15.2.0",
+    "socket.io": "^2.3.0"
   }
 }
