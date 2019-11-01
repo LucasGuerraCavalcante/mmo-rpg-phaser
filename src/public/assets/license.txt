@@ -1,5 +1,5 @@
-All assets used in this tutorial are CC0 licensed. 
-The tiles are created by Kenney Vleugels and can be found at www.kenney.nl 
+All assets used in this game are CC (BY-NC-ND) licensed. 
+The tiles were created by Lucas Guerra Cavalcante. 
+You can use it in your own project since it doesn't have any commercial\finacial usage.
 
-The player sprites can be found here .
-https://opengameart.org/content/rpg-character-sprites
+"Licensees may copy, distribute, display, and perform the work and make derivative works and remixes based on it only for non-commercial purposes."
