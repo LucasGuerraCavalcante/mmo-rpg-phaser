@@ -1,1 +1,9 @@
+<<<<<<< HEAD
 All assets made by Lucas Guerra Cavalcante
+=======
+All assets used in this game are CC (BY-NC-ND) licensed. 
+The tiles were created by Lucas Guerra Cavalcante. 
+You can use it in your own project since it doesn't have any commercial\finacial usage.
+
+"Licensees may copy, distribute, display, and perform the work and make derivative works and remixes based on it only for non-commercial purposes."
+>>>>>>> c62f9fe01a559609830765947a6e039d130adf31
