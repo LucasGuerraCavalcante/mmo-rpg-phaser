@@ -34,7 +34,7 @@ var WorldScene = new Phaser.Class({
     },
     create: function (){
 
-        // Creating the world / Cenario e Objetos
+        // Creating the world / Criando Cenario
 
         var map = this.make.tilemap({ key: 'map' });
         var tiles = map.addTilesetImage('spritesheet', 'tiles');
