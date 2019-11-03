@@ -15,7 +15,6 @@ var BootScene = new Phaser.Class({
     },
  
     create: function (){
-        
         this.scene.start('WorldScene');
     }
 });
@@ -33,7 +32,9 @@ var WorldScene = new Phaser.Class({
         
     },
     create: function (){
-
+        var self = this;
+        this.socket = io()
+ 	
         // Creating the world / Criando Cenario
 
         var map = this.make.tilemap({ key: 'map' });
