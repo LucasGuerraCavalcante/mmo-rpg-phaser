@@ -39,9 +39,11 @@ var WorldScene = new Phaser.Class({
     function WorldScene (){
         Phaser.Scene.call(this, { key: 'WorldScene' });
     },
+
     preload: function (){
         
     },
+    
     create: function (){
         var self = this;
         this.socket = io()
@@ -116,9 +118,22 @@ var WorldScene = new Phaser.Class({
         this.cameras.main.startFollow(this.player);
         this.cameras.main.roundPixels = true;
 
+        // we listen for 'wake' event
+        this.sys.events.on('wake', this.wake, this);
+
+    },
+    wake: function() {
+        this.cursors.left.reset();
+        this.cursors.right.reset();
+        this.cursors.up.reset();
+        this.cursors.down.reset();
     },
 
     overlapEnemy: function(player, zone) {
+
+        // we move the zone to some other location
+        zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+        zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
 
         // start battle / iniciar batalha
 
@@ -213,7 +228,7 @@ var BattleScene = new Phaser.Class({
         this.add.existing(warrior);
         
         // enemies / inimigos
-        var mushroom = new Enemy(this, 200, 50, 'enemies', 0, 'Shroom', 20, 3);
+        var mushroom = new Enemy(this, 200, 50, 'enemies', 0, 'Shroom', 40, 3);
         this.add.existing(mushroom);
         
         // array (party) with heroes / herois
