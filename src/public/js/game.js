@@ -219,9 +219,15 @@ var BattleScene = new Phaser.Class({
 
     create: function ()
     {
+
      
         this.add.image(160,120,'background');
+        this.startBattle()
+        // on wake event we call startBattle too
+        this.sys.events.on('wake', this.startBattle, this);  
+    },
 
+    startBattle: function() {
         
         // player character / jogador
         var warrior = new Hero(this, 140, 130, 'player', 9, 'Hero', 100, 20);        
