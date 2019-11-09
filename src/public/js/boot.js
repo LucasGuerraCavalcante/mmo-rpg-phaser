@@ -55,42 +55,18 @@ var WorldScene = new Phaser.Class({
     },
     
     create: function (){
-        var self = this;
-        this.socket = io()
+        //var self = this;
+        //this.socket = io()
  	
         // Creating the world / Criando Cenario
 
         var map = this.make.tilemap({ key: 'map' });
         var tiles = map.addTilesetImage('spritesheet', 'tiles');
+
 	    var grass = map.createStaticLayer('Grass', tiles, 0, 0);
         var obstacles = map.createStaticLayer('Obstacles', tiles, 0, 0);
         
-        obstacles.setCollisionByExclusion([-1]);
-
-        // Creating the player / Jogador
-
-        this.player = this.physics.add.sprite(50, 100, 'player', 6);
-        
-        this.physics.world.bounds.width = map.widthInPixels;
-        this.physics.world.bounds.height = map.heightInPixels;
-        this.player.setCollideWorldBounds(true);
-        
-        this.physics.add.collider(this.player, obstacles);
-        
-        // Setting up the controls / Controles
-
-        this.cursors = this.input.keyboard.createCursorKeys();
-
-        // Generating enemies / Gerar inimigos
-        this.spawns = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
-        for(var i = 0; i < 15; i++) {
-            var x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
-            var y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
-            this.spawns.create(x, y, 20, 20);            
-        }   
-
-        // Enemy collider / colisor de inimigos
-        this.physics.add.overlap(this.player, this.spawns, this.overlapEnemy, false, this);     
+        obstacles.setCollisionByExclusion([-1]);     
 
         // Controls and Animations / Controles e Animacao
 
@@ -122,11 +98,36 @@ var WorldScene = new Phaser.Class({
             repeat: -1
         });       
 
+        // Creating the player / Jogador
+
+        this.player = this.physics.add.sprite(0, 0, 'player', 6);
+
+        this.physics.world.bounds.width = map.widthInPixels;
+        this.physics.world.bounds.height = map.heightInPixels;
+        this.player.setCollideWorldBounds(true);
+        
+        this.physics.add.collider(this.player, obstacles);
+
         // Camera 
-	
+
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(this.player);
         this.cameras.main.roundPixels = true;
+
+        // Setting up the controls / Iniciando Controles
+
+        this.cursors = this.input.keyboard.createCursorKeys();
+
+        // Generating enemies / Gerar inimigos
+        this.spawns = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
+        for(var i = 0; i < 15; i++) {
+            var x = Phaser.Math.RND.between(20, this.physics.world.bounds.width);
+            var y = Phaser.Math.RND.between(20, this.physics.world.bounds.height);
+            this.spawns.create(x, y, 20, 20);            
+        }   
+
+        // Enemy collider / colisor de inimigos
+        this.physics.add.overlap(this.player, this.spawns, this.overlapEnemy, false, this);
 
         // we listen for 'wake' event
         this.sys.events.on('wake', this.wake, this);
@@ -153,13 +154,8 @@ var WorldScene = new Phaser.Class({
         this.scene.switch('BattleScene');
 
     },
-
-    exitBattle: function() {
-        this.scene.sleep('UIScene');
-        this.scene.switch('WorldScene');
-    },
-
     update: function (time, delta)
+    // Controls and Animations / Controles e Animacoes
     {
         this.player.body.setVelocity(0);
 

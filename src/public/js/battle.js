@@ -16,7 +16,7 @@ var BattleScene = new Phaser.Class({
     function BattleScene ()
     {
 
-        Phaser.Scene.call(this, { key: 'BattleScene' });
+        Phaser.Scene.call(this, { key: "BattleScene" });
     },
 
     create: function ()
@@ -427,7 +427,7 @@ var UIScene = new Phaser.Class({
         this.enemiesMenu.remap(enemies);
     },
     onKeyInput: function(event) {
-        if(this.currentMenu) {
+        if(this.currentMenu && this.currentMenu.selected) {
             if(event.code === "ArrowUp") {
                 this.currentMenu.moveSelectionUp();
             } else if(event.code === "ArrowDown") {
