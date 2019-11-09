@@ -51,7 +51,7 @@ var BattleScene = new Phaser.Class({
      
     },
     nextTurn: function() {  
-        // if we have victory or game over
+        // if we have victory or game over / dectar fim de jogo ou vitoria
         if(this.checkEndBattle()) {           
             this.endBattle();
             return;
@@ -80,36 +80,36 @@ var BattleScene = new Phaser.Class({
             this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
         }
     },      
-    // check for game over or victory
+    // check for game over or victory / checar game over ou vitoria
     checkEndBattle: function() {        
         var victory = true;
-        // if all enemies are dead we have victory
+        // if all enemies are dead we have victory / checar se todos inimigos estao mortos (vitoria)
         for(var i = 0; i < this.enemies.length; i++) {
             if(this.enemies[i].living)
                 victory = false;
         }
         var gameOver = true;
-        // if all heroes are dead we have game over
+        // if all heroes are dead we have game over / checar se todos herois estao mortos (game over)
         for(var i = 0; i < this.heroes.length; i++) {
             if(this.heroes[i].living)
                 gameOver = false;
         }
         return victory || gameOver;
     },
-    // when the player have selected the enemy to be attacked
+    // when the player have selected the enemy to be attacked / quando o jogador selecionar o inimigo que sera atacado
     receivePlayerSelection: function(action, target) {
         if(action == "attack") {            
             this.units[this.index].attack(this.enemies[target]);              
         }
-        // next turn in 3 seconds
+        // next turn in 3 seconds / iniciar proximo turno em 3 segundos
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });        
     },  
     endBattle: function() {       
-        // clear state, remove sprites
+        // clear state, remove sprites / limpar sprites
         this.heroes.length = 0;
         this.enemies.length = 0;
         for(var i = 0; i < this.units.length; i++) {
-            // link item
+            // link item 
             this.units[i].destroy();            
         }
         this.units.length = 0;
@@ -130,8 +130,8 @@ var Unit = new Phaser.Class({
     function Unit(scene, x, y, texture, frame, type, hp, damage) {
         Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame)
         this.type = type;
-        this.maxHp = this.hp = hp;
-        this.damage = damage; // default damage     
+        this.hp = hp //this.maxHp = this.hp = hp;
+        this.damage = damage;     
         this.living = true;         
         this.menuItem = null;
     },

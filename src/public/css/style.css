@@ -14,3 +14,7 @@ body {
     text-shadow: 2px 2px #000000;
 
 }
+
+#canvasRow {
+    margin-top: 20px;
+}

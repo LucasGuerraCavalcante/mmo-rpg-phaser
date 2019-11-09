@@ -81,16 +81,15 @@ var WorldScene = new Phaser.Class({
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
-        // Generating enemies 
+        // Generating enemies / Gerar inimigos
         this.spawns = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
         for(var i = 0; i < 15; i++) {
-            // Generating 15 "random" areas where the enemies will be
             var x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
             var y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
             this.spawns.create(x, y, 20, 20);            
         }   
 
-        // Enemy collider
+        // Enemy collider / colisor de inimigos
         this.physics.add.overlap(this.player, this.spawns, this.overlapEnemy, false, this);     
 
         // Controls and Animations / Controles e Animacao
