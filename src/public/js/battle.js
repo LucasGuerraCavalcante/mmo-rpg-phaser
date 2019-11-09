@@ -340,7 +340,7 @@ var UIScene = new Phaser.Class({
 
     {    
 
-        // get data from battlescene
+        // get data from battlescene  / puxando dados da cena de batalha
         this.battleScene = this.scene.get('BattleScene');
     
         this.graphics = this.add.graphics();
@@ -353,24 +353,20 @@ var UIScene = new Phaser.Class({
         this.graphics.strokeRect(188, 150, 130, 100);
         this.graphics.fillRect(188, 150, 130, 100);
 
-        // basic container to hold all menus
         this.menus = this.add.container();
         
         this.heroesMenu = new HeroesMenu(9, 153, this);           
         this.actionsMenu = new ActionsMenu(100, 153, this);            
         this.enemiesMenu = new EnemiesMenu(195, 153, this);   
     
-        // the currently selected menu 
         this.currentMenu = this.actionsMenu;
         
-        // add menus to the container
         this.menus.add(this.heroesMenu);
         this.menus.add(this.actionsMenu);
         this.menus.add(this.enemiesMenu);
                 
         this.battleScene = this.scene.get("BattleScene");                                
-        
-        // listen for keyboard events
+
         this.input.keyboard.on("keydown", this.onKeyInput, this);   
         
         // when its player cunit turn to move
