@@ -32,19 +32,21 @@ var BattleScene = new Phaser.Class({
         this.load.spritesheet('enemies', 'src/public/assets/enemies.png', { frameWidth: 32, frameHeight: 32 });
         
         // player character / jogador
-        var warrior = new Hero(this, 100, 130, 'player', 9, 'Hero', 100, 20);        
+        var warrior = new Hero(this, 140, 130, 'player', 9, 'Hero', 100);        
         this.add.existing(warrior);
         this.heroes = [warrior]
 
-        var randomNum = Math.floor(Math.random()*2)
+        var randomNum = Math.floor(Math.random()*3) + 1
 
-        if (randomNum == 0) {
+        if (randomNum == 1) {
 
-            var mushroom = new Enemy(this, 140, 50, 'enemies', 0, 'Shroom', 40, 3);
-            var ent = new Enemy(this, 140, 50, 'enemies', 1, 'Ent', 80, 3);
-            var duck = new Enemy(this, 140, 50, 'enemies', 3, 'Mad Duck', 100, 2);
-            var pig = new Enemy(this, 140, 50, 'enemies', 4, 'Magik Pig', 80, 2);
-            var flower = new Enemy(this, 140, 50, 'enemies', 5, 'Flower', 40, 2);
+            // One random enemy
+
+            var mushroom = new Enemy(this, 175, 50, 'enemies', 0, 'Shroom', 20);
+            var ent = new Enemy(this, 175, 50, 'enemies', 1, 'Ent', 20);
+            var duck = new Enemy(this, 175, 50, 'enemies', 3, 'Mad Duck', 20);
+            var pig = new Enemy(this, 175, 50, 'enemies', 4, 'Magik Pig', 20);
+            var flower = new Enemy(this, 175, 50, 'enemies', 5, 'Flower', 20);
 
             var grimoire1 = [mushroom, ent, duck, pig, flower]
 
@@ -52,12 +54,14 @@ var BattleScene = new Phaser.Class({
             this.add.existing(enemy1);
             this.enemies = [enemy1];
 
-        } else if (randomNum == 1) {
+        } else if (randomNum == 2) {
 
-            var mushroom = new Enemy(this, 140, 50, 'enemies', 0, 'Shroom', 40, 3);
-            var ent = new Enemy(this, 140, 50, 'enemies', 1, 'Ent', 80, 3);
-            var duck = new Enemy(this, 175, 50, 'enemies', 3, 'Mad Duck', 100, 2);
-            var pig = new Enemy(this, 175, 50, 'enemies', 4, 'Magik Pig', 80, 2);
+            // Two random enemies
+
+            var mushroom = new Enemy(this, 175, 50, 'enemies', 0, 'Shroom', 20);
+            var ent = new Enemy(this, 175, 50, 'enemies', 1, 'Ent', 20);
+            var duck = new Enemy(this, 210, 50, 'enemies', 3, 'Mad Duck', 20);
+            var pig = new Enemy(this, 210, 50, 'enemies', 4, 'Magik Pig', 20);
 
             var grimoire1 = [mushroom, ent]
             var grimoire2 = [duck, pig]
@@ -70,13 +74,15 @@ var BattleScene = new Phaser.Class({
 
             this.enemies = [enemy1, enemy2];
 
-        } else if (randomNum == 2) {
+        } else if (randomNum == 3) {
 
-            var mushroom = new Enemy(this, 140, 50, 'enemies', 0, 'Shroom', 40, 3);
-            var ent = new Enemy(this, 140, 50, 'enemies', 1, 'Ent', 80, 3);
-            var duck = new Enemy(this, 175, 50, 'enemies', 3, 'Mad Duck', 100, 2);
-            var pig = new Enemy(this, 175, 50, 'enemies', 4, 'Magik Pig', 80, 2);
-            var flower = new Enemy(this, 210, 50, 'enemies', 5, 'Flower', 40, 2);
+            // Tree random enemies
+
+            var mushroom = new Enemy(this, 175, 50, 'enemies', 0, 'Shroom', 20);
+            var ent = new Enemy(this, 175, 50, 'enemies', 1, 'Ent', 20);
+            var duck = new Enemy(this, 210, 50, 'enemies', 3, 'Mad Duck', 20);
+            var pig = new Enemy(this, 210, 50, 'enemies', 4, 'Magik Pig', 20);
+            var flower = new Enemy(this, 245, 50, 'enemies', 5, 'Flower', 20);
 
             var grimoire1 = [mushroom, ent]
             var grimoire2 = [duck, pig]
@@ -182,11 +188,10 @@ var Unit = new Phaser.Class({
 
     initialize:
 
-    function Unit(scene, x, y, texture, frame, type, hp, damage) {
+    function Unit(scene, x, y, texture, frame, type, hp) {
         Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame)
         this.type = type;
-        this.maxHp = this.hp = hp;
-        this.damage = damage;     
+        this.maxHp = this.hp = hp;   
         this.living = true;         
         this.menuItem = null;
     },
@@ -197,8 +202,9 @@ var Unit = new Phaser.Class({
     // attack the target unit
     attack: function(target) {
         if(target.living) {
-            target.takeDamage(this.damage);
-            this.scene.events.emit("Message", this.type + " attacks " + target.type + " for " + this.damage + " damage");
+            damage = Math.floor(Math.random()*10) + 1
+            target.takeDamage(damage);
+            this.scene.events.emit("Message", this.type + " attacks " + target.type + " for " + damage + " damage");
         }
     },    
     takeDamage: function(damage) {
@@ -217,8 +223,8 @@ var Enemy = new Phaser.Class({
     Extends: Unit,
 
     initialize:
-    function Enemy(scene, x, y, texture, frame, type, hp, damage) {
-        Unit.call(this, scene, x, y, texture, frame, type, hp, damage);
+    function Enemy(scene, x, y, texture, frame, type, hp) {
+        Unit.call(this, scene, x, y, texture, frame, type, hp);
     }
 });
 
@@ -226,8 +232,8 @@ var Hero = new Phaser.Class({
     Extends: Unit,
  
     initialize:
-    function Hero(scene, x, y, texture, frame, type, hp, damage) {
-        Unit.call(this, scene, x, y, texture, frame, type, hp, damage);
+    function Hero(scene, x, y, texture, frame, type, hp) {
+        Unit.call(this, scene, x, y, texture, frame, type, hp);
         
         this.setScale(5);
     }
