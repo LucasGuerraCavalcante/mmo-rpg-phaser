@@ -32,33 +32,67 @@ var BattleScene = new Phaser.Class({
         this.load.spritesheet('enemies', 'src/public/assets/enemies.png', { frameWidth: 32, frameHeight: 32 });
         
         // player character / jogador
-        var warrior = new Hero(this, 140, 130, 'player', 9, 'Hero', 100, 20);        
+        var warrior = new Hero(this, 100, 130, 'player', 9, 'Hero', 100, 20);        
         this.add.existing(warrior);
-        
-        // enemies / inimigos
-        var mushroom = new Enemy(this, 200, 50, 'enemies', 0, 'Shroom', 40, 3);
-        var ent = new Enemy(this, 240, 50, 'enemies', 1, 'Ent', 80, 3);
-        var duck = new Enemy(this, 140, 50, 'enemies', 3, 'Mad Duck', 100, 2);
-        var pig = new Enemy(this, 180, 50, 'enemies', 4, 'Magik Pig', 80, 2);
-        var flower = new Enemy(this, 300, 50, 'enemies', 5, 'Flower', 40, 2);
+        this.heroes = [warrior]
 
-        var grimoire1 = [mushroom, ent]
-        var grimoire2 = [duck, pig]
-        var grimoire3 = [flower]
-        
-        // array (party) with heroes / herois
-        this.heroes = [warrior];
+        var randomNum = Math.floor(Math.random()*2)
 
-        var enemy1 = grimoire1[Math.floor(Math.random()*grimoire1.length)]
-        var enemy2 = grimoire2[Math.floor(Math.random()*grimoire2.length)]
-        var enemy3 = grimoire3[Math.floor(Math.random()*grimoire3.length)]
+        if (randomNum == 0) {
 
-        this.add.existing(enemy1);
-        this.add.existing(enemy2);
-        this.add.existing(enemy3);
+            var mushroom = new Enemy(this, 140, 50, 'enemies', 0, 'Shroom', 40, 3);
+            var ent = new Enemy(this, 140, 50, 'enemies', 1, 'Ent', 80, 3);
+            var duck = new Enemy(this, 140, 50, 'enemies', 3, 'Mad Duck', 100, 2);
+            var pig = new Enemy(this, 140, 50, 'enemies', 4, 'Magik Pig', 80, 2);
+            var flower = new Enemy(this, 140, 50, 'enemies', 5, 'Flower', 40, 2);
 
-        // array (party) with enemies / inimigos
-        this.enemies = [enemy1, enemy2, enemy3];
+            var grimoire1 = [mushroom, ent, duck, pig, flower]
+
+            var enemy1 = grimoire1[Math.floor(Math.random()*grimoire1.length)]
+            this.add.existing(enemy1);
+            this.enemies = [enemy1];
+
+        } else if (randomNum == 1) {
+
+            var mushroom = new Enemy(this, 140, 50, 'enemies', 0, 'Shroom', 40, 3);
+            var ent = new Enemy(this, 140, 50, 'enemies', 1, 'Ent', 80, 3);
+            var duck = new Enemy(this, 175, 50, 'enemies', 3, 'Mad Duck', 100, 2);
+            var pig = new Enemy(this, 175, 50, 'enemies', 4, 'Magik Pig', 80, 2);
+
+            var grimoire1 = [mushroom, ent]
+            var grimoire2 = [duck, pig]
+
+            var enemy1 = grimoire1[Math.floor(Math.random()*grimoire1.length)]
+            var enemy2 = grimoire2[Math.floor(Math.random()*grimoire2.length)]
+
+            this.add.existing(enemy1);
+            this.add.existing(enemy2);
+
+            this.enemies = [enemy1, enemy2];
+
+        } else if (randomNum == 2) {
+
+            var mushroom = new Enemy(this, 140, 50, 'enemies', 0, 'Shroom', 40, 3);
+            var ent = new Enemy(this, 140, 50, 'enemies', 1, 'Ent', 80, 3);
+            var duck = new Enemy(this, 175, 50, 'enemies', 3, 'Mad Duck', 100, 2);
+            var pig = new Enemy(this, 175, 50, 'enemies', 4, 'Magik Pig', 80, 2);
+            var flower = new Enemy(this, 210, 50, 'enemies', 5, 'Flower', 40, 2);
+
+            var grimoire1 = [mushroom, ent]
+            var grimoire2 = [duck, pig]
+            var grimoire3 = [flower]
+
+            var enemy1 = grimoire1[Math.floor(Math.random()*grimoire1.length)]
+            var enemy2 = grimoire2[Math.floor(Math.random()*grimoire2.length)]
+            var enemy3 = grimoire3[Math.floor(Math.random()*grimoire3.length)]
+
+            this.add.existing(enemy1);
+            this.add.existing(enemy2);
+            this.add.existing(enemy3);
+
+            this.enemies = [enemy1, enemy2, enemy3];
+
+        }
 
         // array with both parties, who will attack / herois e inimigos, quem ira atacar
         this.units = this.heroes.concat(this.enemies);
