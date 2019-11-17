@@ -100,7 +100,7 @@ var WorldScene = new Phaser.Class({
 
         // Creating the player / Jogador
 
-        this.player = this.physics.add.sprite(0, 0, 'player', 6);
+        this.player = this.physics.add.sprite(50, 20, 'player', 6);
 
         this.physics.world.bounds.width = map.widthInPixels;
         this.physics.world.bounds.height = map.heightInPixels;

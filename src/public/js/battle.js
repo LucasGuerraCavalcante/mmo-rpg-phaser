@@ -28,6 +28,8 @@ var BattleScene = new Phaser.Class({
     },
 
     startBattle: function() {
+
+        this.load.spritesheet('enemies', 'src/public/assets/enemies.png', { frameWidth: 32, frameHeight: 32 });
         
         // player character / jogador
         var warrior = new Hero(this, 140, 130, 'player', 9, 'Hero', 100, 20);        
@@ -35,12 +37,29 @@ var BattleScene = new Phaser.Class({
         
         // enemies / inimigos
         var mushroom = new Enemy(this, 200, 50, 'enemies', 0, 'Shroom', 40, 3);
-        this.add.existing(mushroom);
+        var ent = new Enemy(this, 240, 50, 'enemies', 1, 'Ent', 80, 3);
+        var duck = new Enemy(this, 140, 50, 'enemies', 3, 'Mad Duck', 100, 2);
+        var pig = new Enemy(this, 180, 50, 'enemies', 4, 'Magik Pig', 80, 2);
+        var flower = new Enemy(this, 300, 50, 'enemies', 5, 'Flower', 40, 2);
+
+        var grimoire1 = [mushroom, ent]
+        var grimoire2 = [duck, pig]
+        var grimoire3 = [flower]
         
         // array (party) with heroes / herois
         this.heroes = [warrior];
+
+        var enemy1 = grimoire1[Math.floor(Math.random()*grimoire1.length)]
+        var enemy2 = grimoire2[Math.floor(Math.random()*grimoire2.length)]
+        var enemy3 = grimoire3[Math.floor(Math.random()*grimoire3.length)]
+
+        this.add.existing(enemy1);
+        this.add.existing(enemy2);
+        this.add.existing(enemy3);
+
         // array (party) with enemies / inimigos
-        this.enemies = [mushroom];
+        this.enemies = [enemy1, enemy2, enemy3];
+
         // array with both parties, who will attack / herois e inimigos, quem ira atacar
         this.units = this.heroes.concat(this.enemies);
 
@@ -113,6 +132,8 @@ var BattleScene = new Phaser.Class({
             this.units[i].destroy();            
         }
         this.units.length = 0;
+        this.heroes.hp = 100;
+        this.enemies.hp = 40;
         // sleep the UI
         this.scene.sleep('UIScene');
         // return to WorldScene and sleep current BattleScene
@@ -130,7 +151,7 @@ var Unit = new Phaser.Class({
     function Unit(scene, x, y, texture, frame, type, hp, damage) {
         Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame)
         this.type = type;
-        this.hp = hp //this.maxHp = this.hp = hp;
+        this.maxHp = this.hp = hp;
         this.damage = damage;     
         this.living = true;         
         this.menuItem = null;
