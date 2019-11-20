@@ -1,4 +1,8 @@
 
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min) ) + min;
+  }
+
 /***
  * 
  * 
@@ -23,7 +27,7 @@ var BattleScene = new Phaser.Class({
     {
         this.add.image(160,120,'background');
         this.startBattle()
-        // on wake event we call startBattle too
+
         this.sys.events.on('wake', this.startBattle, this);  
     },
 
@@ -36,7 +40,7 @@ var BattleScene = new Phaser.Class({
         this.add.existing(warrior);
         this.heroes = [warrior]
 
-        var randomNum = Math.floor(Math.random()*3) + 1
+        var randomNum = getRndInteger(1,3)
 
         if (randomNum == 1) {
 
@@ -50,7 +54,7 @@ var BattleScene = new Phaser.Class({
 
             var grimoire1 = [mushroom, ent, duck, pig, flower]
 
-            var enemy1 = grimoire1[Math.floor(Math.random()*grimoire1.length)]
+            var enemy1 = grimoire1[getRndInteger(0,grimoire1.length)]
             this.add.existing(enemy1);
             this.enemies = [enemy1];
 
@@ -66,8 +70,8 @@ var BattleScene = new Phaser.Class({
             var grimoire1 = [mushroom, ent]
             var grimoire2 = [duck, pig]
 
-            var enemy1 = grimoire1[Math.floor(Math.random()*grimoire1.length)]
-            var enemy2 = grimoire2[Math.floor(Math.random()*grimoire2.length)]
+            var enemy1 = grimoire1[getRndInteger(0,grimoire1.length)]
+            var enemy2 = grimoire2[getRndInteger(0,grimoire2.length)]
 
             this.add.existing(enemy1);
             this.add.existing(enemy2);
@@ -88,9 +92,9 @@ var BattleScene = new Phaser.Class({
             var grimoire2 = [duck, pig]
             var grimoire3 = [flower]
 
-            var enemy1 = grimoire1[Math.floor(Math.random()*grimoire1.length)]
-            var enemy2 = grimoire2[Math.floor(Math.random()*grimoire2.length)]
-            var enemy3 = grimoire3[Math.floor(Math.random()*grimoire3.length)]
+            var enemy1 = grimoire1[getRndInteger(0,grimoire1.length)]
+            var enemy2 = grimoire2[getRndInteger(0,grimoire2.length)]
+            var enemy3 = grimoire3[getRndInteger(0,grimoire3.length)]
 
             this.add.existing(enemy1);
             this.add.existing(enemy2);
@@ -116,26 +120,27 @@ var BattleScene = new Phaser.Class({
             return;
         }
         do {
-            // currently active unit
+            // currently active unit / unidade ativa atual
             this.index++;
-            // if there are no more units, we start again from the first one
+
             if(this.index >= this.units.length) {
                 this.index = 0;
             }            
         } while(!this.units[this.index].living);
-        // if its player hero
+
+        // if its player hero / se a unidade for o jogador
         if(this.units[this.index] instanceof Hero) {
-            // we need the player to select action and then enemy
+            // we need the player to select action and then enemy / o jogador precisa selecionar a acao
             this.events.emit("PlayerSelect", this.index);
-        } else { // else if its enemy unit
-            // pick random living hero to be attacked
+
+        } else { // if its enemy unit / se a unidade for um inimigo
+
             var r;
             do {
                 r = Math.floor(Math.random() * this.heroes.length);
             } while(!this.heroes[r].living) 
-            // call the enemy's attack function 
+            // call the enemy's attack function / inimigo ira atacar (chama a funcao atacar)
             this.units[this.index].attack(this.heroes[r]);  
-            // add timer for the next turn, so will have smooth gameplay
             this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
         }
     },      
@@ -168,21 +173,20 @@ var BattleScene = new Phaser.Class({
         this.heroes.length = 0;
         this.enemies.length = 0;
         for(var i = 0; i < this.units.length; i++) {
-            // link item 
+
             this.units[i].destroy();            
         }
         this.units.length = 0;
         this.heroes.hp = 100;
         this.enemies.hp = 40;
-        // sleep the UI
+
         this.scene.sleep('UIScene');
-        // return to WorldScene and sleep current BattleScene
+
         this.scene.switch('WorldScene');
     }
 
 });
 
-// base class for heroes and enemies
 var Unit = new Phaser.Class({
     Extends: Phaser.GameObjects.Sprite,
 
@@ -199,10 +203,10 @@ var Unit = new Phaser.Class({
     setMenuItem: function(item) {
         this.menuItem = item;
     },
-    // attack the target unit
+    // attack the target unit / ataca a unidade alvo
     attack: function(target) {
         if(target.living) {
-            damage = Math.floor(Math.random()*10) + 1
+            damage = getRndInteger(0,10)
             target.takeDamage(damage);
             this.scene.events.emit("Message", this.type + " attacks " + target.type + " for " + damage + " damage");
         }
@@ -255,7 +259,7 @@ var MenuItem = new Phaser.Class({
     deselect: function() {
         this.setColor("#ffffff");
     },
-    // when the associated enemy or player unit is killed
+
     unitKilled: function() {
         this.active = false;
         this.visible = false;
@@ -263,7 +267,6 @@ var MenuItem = new Phaser.Class({
     
 });
 
-// base menu class, container for menu items
 var Menu = new Phaser.Class({
     Extends: Phaser.GameObjects.Container,
     
