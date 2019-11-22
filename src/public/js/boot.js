@@ -79,7 +79,7 @@ var WorldScene = new Phaser.Class({
 
         // Creating the player / Jogador
 
-        this.player = this.physics.add.sprite(50, 20, 'player', 6);
+        this.player = this.physics.add.sprite(40, 40, 'player', 0);
 
         this.physics.world.bounds.width = map.widthInPixels;
         this.physics.world.bounds.height = map.heightInPixels;
@@ -129,9 +129,9 @@ var WorldScene = new Phaser.Class({
 
         // Generating enemies / Gerar inimigos
         this.spawns = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
-        for(var i = 0; i < 15; i++) {
-            var x = Phaser.Math.RND.between(20, this.physics.world.bounds.width);
-            var y = Phaser.Math.RND.between(20, this.physics.world.bounds.height);
+        for(var i = 0; i < 30; i++) {
+            var x = Phaser.Math.RND.between(60, this.physics.world.bounds.width);
+            var y = Phaser.Math.RND.between(60, this.physics.world.bounds.height);
             this.spawns.create(x, y, 20, 20);            
         }   
 

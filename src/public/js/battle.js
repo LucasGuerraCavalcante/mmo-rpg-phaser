@@ -49,11 +49,11 @@ var BattleScene = new Phaser.Class({
 
             // One random enemy
 
-            var mushroom = new Enemy(this, 175, 50, 'enemies', 0, 'Shroom', 20);
-            var ent = new Enemy(this, 175, 50, 'enemies', 1, 'Ent', 20);
-            var duck = new Enemy(this, 175, 50, 'enemies', 3, 'Mad Duck', 20);
-            var pig = new Enemy(this, 175, 50, 'enemies', 4, 'Magik Pig', 20);
-            var flower = new Enemy(this, 175, 50, 'enemies', 5, 'Flower', 20);
+            var mushroom = new Enemy(this, 175, 70, 'enemies', 0, 'Shroom', 20);
+            var ent = new Enemy(this, 175, 70, 'enemies', 1, 'Ent', 20);
+            var duck = new Enemy(this, 175, 70, 'enemies', 3, 'Mad Duck', 20);
+            var pig = new Enemy(this, 175, 70, 'enemies', 4, 'Magik Pig', 20);
+            var flower = new Enemy(this, 175, 70, 'enemies', 5, 'Flower', 20);
 
             var grimoire1 = [mushroom, ent, duck, pig, flower]
 
@@ -65,10 +65,10 @@ var BattleScene = new Phaser.Class({
 
             // Two random enemies
 
-            var mushroom = new Enemy(this, 175, 50, 'enemies', 0, 'Shroom', 20);
-            var ent = new Enemy(this, 175, 50, 'enemies', 1, 'Ent', 20);
-            var duck = new Enemy(this, 210, 50, 'enemies', 3, 'Mad Duck', 20);
-            var pig = new Enemy(this, 210, 50, 'enemies', 4, 'Magik Pig', 20);
+            var mushroom = new Enemy(this, 175, 70, 'enemies', 0, 'Shroom', 20);
+            var ent = new Enemy(this, 175, 70, 'enemies', 1, 'Ent', 20);
+            var duck = new Enemy(this, 210, 70, 'enemies', 3, 'Mad Duck', 20);
+            var pig = new Enemy(this, 210, 70, 'enemies', 4, 'Magik Pig', 20);
 
             var grimoire1 = [mushroom, ent]
             var grimoire2 = [duck, pig]
@@ -85,11 +85,11 @@ var BattleScene = new Phaser.Class({
 
             // Tree random enemies
 
-            var mushroom = new Enemy(this, 175, 50, 'enemies', 0, 'Shroom', 20);
-            var ent = new Enemy(this, 175, 50, 'enemies', 1, 'Ent', 20);
-            var duck = new Enemy(this, 210, 50, 'enemies', 3, 'Mad Duck', 20);
-            var pig = new Enemy(this, 210, 50, 'enemies', 4, 'Magik Pig', 20);
-            var flower = new Enemy(this, 245, 50, 'enemies', 5, 'Flower', 20);
+            var mushroom = new Enemy(this, 175, 70, 'enemies', 0, 'Shroom', 20);
+            var ent = new Enemy(this, 175, 70, 'enemies', 1, 'Ent', 20);
+            var duck = new Enemy(this, 210, 70, 'enemies', 3, 'Mad Duck', 20);
+            var pig = new Enemy(this, 210, 70, 'enemies', 4, 'Magik Pig', 20);
+            var flower = new Enemy(this, 245, 70, 'enemies', 5, 'Flower', 20);
 
             var grimoire1 = [mushroom, ent]
             var grimoire2 = [duck, pig]
