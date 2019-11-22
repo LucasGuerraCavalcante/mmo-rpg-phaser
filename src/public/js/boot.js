@@ -19,7 +19,9 @@ var BootScene = new Phaser.Class({
 
     preload: function (){
         this.load.image('tiles', 'public/assets/map/spritesheet.png');
+
         this.load.tilemapTiledJSON('map', 'public/assets/map/map.json');
+
         this.load.spritesheet('player', 'public/assets/player.png', { frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('enemies', 'public/assets/enemies.png', { frameWidth: 32, frameHeight: 32 });
 
@@ -61,12 +63,35 @@ var WorldScene = new Phaser.Class({
         // Creating the world / Criando Cenario
 
         var map = this.make.tilemap({ key: 'map' });
-        var tiles = map.addTilesetImage('spritesheet', 'tiles');
 
-	    var grass = map.createStaticLayer('Grass', tiles, 0, 0);
-        var obstacles = map.createStaticLayer('Obstacles', tiles, 0, 0);
+        var tiles = map.addTilesetImage("spritesheet", "tiles");
+
+        var botLayer = map.createStaticLayer("bot", tiles, 0, 0);
+        var topLayer = map.createStaticLayer("top", tiles, 0, 0);
+
+        //var map = this.make.tilemap({ key: 'map' });
+        //var tiles = map.addTilesetImage('spritesheet', 'tiles');
+
+	    //var grass = map.createStaticLayer('bot', tiles, 0, 0);
+        //var obstacles = map.createStaticLayer('top', tiles, 0, 0);
         
-        obstacles.setCollisionByExclusion([-1]);     
+        topLayer.setCollisionByExclusion([-1]);         
+
+        // Creating the player / Jogador
+
+        this.player = this.physics.add.sprite(50, 20, 'player', 6);
+
+        this.physics.world.bounds.width = map.widthInPixels;
+        this.physics.world.bounds.height = map.heightInPixels;
+        this.player.setCollideWorldBounds(true);
+        
+        this.physics.add.collider(this.player, topLayer);
+
+        // Camera 
+
+        this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+        this.cameras.main.startFollow(this.player);
+        this.cameras.main.roundPixels = true;
 
         // Controls and Animations / Controles e Animacao
 
@@ -96,23 +121,7 @@ var WorldScene = new Phaser.Class({
             frames: this.anims.generateFrameNumbers('player', { frames: [9, 10, 9, 11]}),
             frameRate: 10,
             repeat: -1
-        });       
-
-        // Creating the player / Jogador
-
-        this.player = this.physics.add.sprite(50, 20, 'player', 6);
-
-        this.physics.world.bounds.width = map.widthInPixels;
-        this.physics.world.bounds.height = map.heightInPixels;
-        this.player.setCollideWorldBounds(true);
-        
-        this.physics.add.collider(this.player, obstacles);
-
-        // Camera 
-
-        this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-        this.cameras.main.startFollow(this.player);
-        this.cameras.main.roundPixels = true;
+        });   
 
         // Setting up the controls / Iniciando Controles
 

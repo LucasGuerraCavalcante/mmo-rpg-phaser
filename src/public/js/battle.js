@@ -1,4 +1,7 @@
 
+
+// "random" integer function / funcao para gerar inteiros "aleatorios"
+
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
   }
