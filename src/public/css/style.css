@@ -7,14 +7,14 @@ body {
     background-color: teal;
 }
 
-#footer {
-    text-align: center;
-    color: white;
-    size: 22px;
-    text-shadow: 2px 2px #000000;
-
-}
-
 #canvasRow {
     margin-top: 20px;
+}
+
+.text {
+    color: white !important;
+    text-align: center;
+    size: 22px;
+    text-shadow: 2px 2px #000000;
+    
 }
